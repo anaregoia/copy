@@ -52,9 +52,58 @@
         🔍 Fazer diagnóstico gratuito
       </button>
 
+      <button id="btnManual" class="mt-3 w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold py-3 rounded-lg border border-slate-700">
+        ✍️ Diagnóstico manual — 100% grátis, sem chave de API
+      </button>
+
       <button id="btnDemo" class="mt-2 w-full text-slate-500 hover:text-slate-300 text-sm py-1">
         Ver um exemplo de diagnóstico (demo)
       </button>
+
+      <!-- MODO MANUAL -->
+      <div id="manualForm" class="hidden mt-5 border-t border-slate-800 pt-5">
+        <p class="text-sm text-slate-400 mb-4">
+          📱 Abra o <a href="https://www.google.com/maps" target="_blank" rel="noopener" class="text-amber-400 underline">Google Maps</a>,
+          busque sua categoria (ex.: <em>"barbearia perto de mim"</em>) e copie os números
+          que aparecem ao lado de cada negócio — a nota (★) e a quantidade de avaliações entre parênteses.
+        </p>
+
+        <p class="font-semibold text-sm text-amber-400">Seu negócio</p>
+        <input id="mMeName" placeholder="Nome do seu negócio" class="mt-2 w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2" />
+        <div class="grid grid-cols-3 gap-2 mt-2">
+          <input id="mMeRating" type="number" step="0.1" min="1" max="5" placeholder="Nota ★" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2" />
+          <input id="mMeReviews" type="number" min="0" placeholder="Avaliações" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2" />
+          <input id="mMePhotos" type="number" min="0" placeholder="Fotos" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2" />
+        </div>
+        <div class="flex gap-4 mt-2 text-sm text-slate-300">
+          <label class="flex items-center gap-1"><input id="mMeWebsite" type="checkbox" class="accent-amber-400" /> Tem site</label>
+          <label class="flex items-center gap-1"><input id="mMeHours" type="checkbox" class="accent-amber-400" checked /> Horários preenchidos</label>
+          <label class="flex items-center gap-1"><input id="mMePhone" type="checkbox" class="accent-amber-400" checked /> Telefone</label>
+        </div>
+
+        <p class="font-semibold text-sm text-amber-400 mt-5">Os 3 primeiros concorrentes que aparecem na busca</p>
+        <div id="mCompetitors">
+          <div class="grid grid-cols-[2fr_1fr_1fr] gap-2 mt-2">
+            <input data-c="name" placeholder="Concorrente 1" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2" />
+            <input data-c="rating" type="number" step="0.1" min="1" max="5" placeholder="Nota ★" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2" />
+            <input data-c="reviews" type="number" min="0" placeholder="Avaliações" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2" />
+          </div>
+          <div class="grid grid-cols-[2fr_1fr_1fr] gap-2 mt-2">
+            <input data-c="name" placeholder="Concorrente 2" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2" />
+            <input data-c="rating" type="number" step="0.1" min="1" max="5" placeholder="Nota ★" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2" />
+            <input data-c="reviews" type="number" min="0" placeholder="Avaliações" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2" />
+          </div>
+          <div class="grid grid-cols-[2fr_1fr_1fr] gap-2 mt-2">
+            <input data-c="name" placeholder="Concorrente 3" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2" />
+            <input data-c="rating" type="number" step="0.1" min="1" max="5" placeholder="Nota ★" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2" />
+            <input data-c="reviews" type="number" min="0" placeholder="Avaliações" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2" />
+          </div>
+        </div>
+
+        <button id="btnRunManual" class="mt-4 w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold py-3 rounded-lg">
+          🔍 Gerar meu diagnóstico
+        </button>
+      </div>
 
       <details class="mt-3 text-xs text-slate-500">
         <summary class="cursor-pointer">⚙️ Configurar chave da API do Google (admin)</summary>

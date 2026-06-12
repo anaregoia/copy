@@ -9,10 +9,29 @@ para o diagnóstico completo no GPT [Lupa GMN](https://chatgpt.com/g/g-695098ab8
 ## Como rodar
 
 1. Abra o `index.html` em qualquer hospedagem estática (GitHub Pages, Vercel, Netlify) ou localmente.
-2. Sem chave de API, o botão "Fazer diagnóstico" cai no **modo demo** (dados fictícios) — já dá para validar copy e layout.
-3. Para dados reais: crie uma chave no [Google Cloud Console](https://console.cloud.google.com/) com a
-   **Places API (New)** + **Maps JavaScript API** habilitadas, restrinja por domínio (HTTP referrer),
-   e cole no campo "⚙️ Configurar chave" da página (fica no `localStorage` do navegador).
+2. **Modo manual (100% grátis, sem chave):** a pessoa abre o Google Maps, copia nota e nº de
+   avaliações dos 3 primeiros concorrentes e digita no formulário — o diagnóstico sai igual.
+3. **Modo demo:** dados fictícios para validar copy e layout.
+4. **Modo automático (opcional):** chave do [Google Cloud Console](https://console.cloud.google.com/)
+   com **Places API (New)** + **Maps JavaScript API**. A camada gratuita cobre ~5.000
+   diagnósticos/mês, mas exige cadastrar cartão no billing — trave a cota no painel para
+   garantir custo zero. Restrinja a chave por domínio (HTTP referrer) e cole no campo
+   "⚙️ Configurar chave" da página (fica no `localStorage`).
+
+## Posicionamento da copy
+
+- **FOMO, não promessa:** o bloco "😮‍💨 O efeito vitrine" mostra o que os líderes têm
+  (site, fotos, prova social, conteúdo ativo) e provoca o "bah, quero um site / quero um
+  perfil desses". Nenhum texto promete "1º lugar no Google" — o CTA diz isso explicitamente.
+
+## Integração com o GPT Lupa GMN
+
+O botão final usa deep link com `?q=`: abre o GPT **com o pré-diagnóstico já preenchido**
+na caixa de mensagem (score, posição, perda estimada, itens piores) — a pessoa só aperta
+enviar e o GPT continua de onde o app parou. Há também um botão "📋 Copiar resumo" como
+alternativa. Nas instruções do GPT, vale adicionar: *"Quando receber uma mensagem iniciada
+por 'Fiz o pré-diagnóstico do meu negócio', use esses dados como entrada e vá direto para
+a análise completa dos 21 fatores."*
 
 ## A estratégia do funil
 

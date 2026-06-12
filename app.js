@@ -205,6 +205,8 @@ function render(report) {
       </table>
     </div>
 
+    ${fomoBlock(me, competitors)}
+
     <h3 class="mt-10 font-bold text-lg">🩺 Diagnóstico item por item</h3>
     <div class="mt-3 space-y-2">
       ${score.items.map((i) => `
@@ -221,23 +223,97 @@ function render(report) {
 
     <div class="mt-10 bg-gradient-to-r from-amber-400 to-amber-300 text-slate-950 rounded-2xl p-7 text-center">
       <h3 class="text-2xl font-extrabold">Quer parar de perder ${fmtBRL(loss.lostMoney)} por mês?</h3>
-      <p class="mt-2 font-medium">Faça o diagnóstico completo no Lupa GMN: análise dos 21 fatores, plano de ação semana a semana e os textos prontos para corrigir cada item.</p>
+      <p class="mt-2 font-medium">Continue no Lupa GMN: ele recebe este diagnóstico pronto e devolve a análise dos 21 fatores, plano de ação semana a semana e os textos para corrigir cada item.</p>
       <div class="mt-4 flex flex-col sm:flex-row gap-3 justify-center">
-        <a href="${GPT_URL}" target="_blank" rel="noopener" class="bg-slate-950 text-amber-300 font-bold px-6 py-3 rounded-lg">🤖 Diagnóstico completo grátis →</a>
+        <a href="${gptDeepLink(me, score, loss)}" target="_blank" rel="noopener" class="bg-slate-950 text-amber-300 font-bold px-6 py-3 rounded-lg">🤖 Continuar diagnóstico no Lupa GMN →</a>
+        <button id="btnCopyReport" class="bg-slate-950/20 border border-slate-950 font-bold px-6 py-3 rounded-lg">📋 Copiar resumo</button>
         ${WHATSAPP ? `<a href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Fiz o diagnóstico do ${me.name} (score ${score.total}/100) e quero corrigir meu perfil.`)}" target="_blank" class="bg-emerald-600 text-white font-bold px-6 py-3 rounded-lg">💬 Falar com especialista</a>` : ""}
       </div>
+      <p class="mt-4 text-xs text-slate-800">Sem promessa de "1º lugar no Google". A promessa é outra: seu perfil deixar de ser o motivo de o cliente escolher o concorrente.</p>
     </div>`;
 
   $("result").classList.remove("hidden");
   $("result").scrollIntoView({ behavior: "smooth" });
+
+  $("btnCopyReport")?.addEventListener("click", async () => {
+    await navigator.clipboard.writeText(reportSummary(me, score, loss));
+    $("btnCopyReport").textContent = "✅ Copiado! Cole no Lupa GMN";
+  });
+}
+
+// ---------- Integração com o GPT Lupa GMN ----------
+// Resumo do pré-diagnóstico que o GPT recebe para continuar a análise
+function reportSummary(me, score, loss) {
+  return [
+    `Fiz o pré-diagnóstico do meu negócio "${me.name}" na ferramenta Lupa GMN:`,
+    `- Score: ${score.total}/100`,
+    `- Posição: ${loss.myRank}º entre ${loss.totalRanked} concorrentes da região`,
+    `- Perda estimada: ${fmtBRL(loss.lostMoney)}/mês`,
+    `- Nota: ${me.rating.toFixed(1)}★ com ${me.reviews} avaliações, ${me.photos} fotos`,
+    `- Site: ${me.website ? "sim" : "não"} | Horários: ${me.hours ? "sim" : "não"} | Telefone: ${me.phone ? "sim" : "não"}`,
+    `Itens com pior pontuação: ${score.items.filter((i) => i.points < i.max * 0.5).map((i) => i.label).join(", ")}.`,
+    `Quero o diagnóstico completo dos 21 fatores e o plano de ação para corrigir meu perfil.`,
+  ].join("\n");
+}
+
+// Abre o GPT com a mensagem já preenchida na caixa de texto (parâmetro ?q=)
+function gptDeepLink(me, score, loss) {
+  return `${GPT_URL}?q=${encodeURIComponent(reportSummary(me, score, loss))}`;
+}
+
+// Bloco de FOMO: o que os líderes têm que faz o cliente (e o dono) pensar "bah, eu quero isso"
+function fomoBlock(me, competitors) {
+  const top = competitors.slice(0, 3);
+  const real = top.length > 0 && !top.some((c) => c.assumed);
+  const best = top[0] || me;
+  const rows = [];
+
+  if (!me.website) rows.push({
+    icon: "🌐", label: "Site profissional",
+    them: real ? `${top.filter((c) => c.website).length} de ${top.length} líderes têm` : "padrão entre os líderes da categoria",
+    you: "você não tem",
+    desire: "bah, quero um site",
+  });
+  if (me.photos < 20) rows.push({
+    icon: "📸", label: "Vitrine de fotos",
+    them: "os líderes exibem dezenas de fotos do espaço, do trabalho, da equipe",
+    you: `você tem ${me.photos}`,
+    desire: "bah, quero um perfil bonito desses",
+  });
+  if (best.reviews > me.reviews * 1.4) rows.push({
+    icon: "⭐", label: "Prova social",
+    them: `${best.name} acumula ${best.reviews} avaliações`,
+    you: `você tem ${me.reviews}`,
+    desire: "bah, quero essa fila de elogios",
+  });
+  rows.push({
+    icon: "📝", label: "Conteúdo ativo (posts e novidades)",
+    them: "líderes publicam toda semana e aparecem sempre \"vivos\" para o Google e para o cliente",
+    you: "quando foi seu último post?",
+    desire: "bah, quero aparecer assim",
+  });
+
+  if (!rows.length) return "";
+  return `
+    <h3 class="mt-10 font-bold text-lg">😮‍💨 O efeito vitrine — o que eles têm</h3>
+    <p class="text-slate-500 text-sm mt-1">O cliente compara os perfis lado a lado antes de escolher. Compare você também:</p>
+    <div class="mt-3 grid sm:grid-cols-2 gap-3">
+      ${rows.map((r) => `
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+          <p class="font-semibold">${r.icon} ${r.label}</p>
+          <p class="text-sm mt-1"><span class="text-emerald-400">Eles:</span> <span class="text-slate-300">${r.them}</span></p>
+          <p class="text-sm"><span class="text-red-400">Você:</span> <span class="text-slate-400">${r.you}</span></p>
+          <p class="text-amber-300 italic text-sm mt-2">“${r.desire}.”</p>
+        </div>`).join("")}
+    </div>`;
 }
 
 function whyBetter(c, me) {
   const reasons = [];
   if (c.reviews > me.reviews * 1.5) reasons.push(`${Math.round(c.reviews / Math.max(1, me.reviews))}x mais avaliações`);
   if (c.rating > me.rating) reasons.push(`nota maior (${c.rating.toFixed(1)} vs ${me.rating.toFixed(1)})`);
-  if (c.website && !me.website) reasons.push("tem site, você não");
-  if (c.hours && !me.hours) reasons.push("horários completos");
+  if (!c.assumed && c.website && !me.website) reasons.push("tem site, você não");
+  if (!c.assumed && c.hours && !me.hours) reasons.push("horários completos");
   return reasons.length ? reasons.join(" · ") : "perfil mais completo e ativo";
 }
 
@@ -286,8 +362,54 @@ async function runDiagnosis(demo = false) {
   }
 }
 
+// ---------- Modo manual (sem chave de API) ----------
+function runManualDiagnosis() {
+  const status = $("status");
+  const ticket = Number($("ticket").value) || 80;
+  const capacidade = Number($("capacidade").value) || 60;
+
+  const me = {
+    name: $("mMeName").value.trim() || "Seu negócio",
+    rating: Number($("mMeRating").value) || 0,
+    reviews: Number($("mMeReviews").value) || 0,
+    photos: Number($("mMePhotos").value) || 0,
+    website: $("mMeWebsite").checked,
+    hours: $("mMeHours").checked,
+    phone: $("mMePhone").checked,
+    address: "",
+  };
+  if (!me.rating) { status.textContent = "Preencha pelo menos a sua nota (★)."; return; }
+
+  const rows = [...$("mCompetitors").children];
+  const competitors = rows.map((row) => {
+    const get = (k) => row.querySelector(`[data-c="${k}"]`).value;
+    return {
+      name: get("name").trim(), rating: Number(get("rating")) || 0,
+      reviews: Number(get("reviews")) || 0,
+      // Campos não visíveis na busca: assume o cenário típico dos líderes
+      photos: 30, website: true, hours: true, phone: true, address: "", assumed: true,
+    };
+  }).filter((c) => c.name && c.rating)
+    .sort((a, b) => visibilityIndex(b) - visibilityIndex(a));
+
+  if (!competitors.length) { status.textContent = "Preencha pelo menos 1 concorrente (nome + nota)."; return; }
+
+  status.textContent = "";
+  const score = computeScore(me, competitors);
+  const loss = computeLoss(me, competitors, ticket, capacidade);
+  lastReport = { me, competitors, score, loss };
+
+  if (LEAD_WEBHOOK) $("leadGate").classList.remove("hidden");
+  else render(lastReport);
+}
+
 $("btnDiagnose").addEventListener("click", () => runDiagnosis(false));
 $("btnDemo").addEventListener("click", () => runDiagnosis(true));
+$("btnManual").addEventListener("click", () => {
+  $("manualForm").classList.toggle("hidden");
+  $("mMeName").value ||= $("businessQuery").value.replace(/,.*$/, "").trim();
+});
+$("btnRunManual").addEventListener("click", runManualDiagnosis);
 $("btnSaveKey").addEventListener("click", () => {
   localStorage.setItem("gmaps_key", $("apiKey").value.trim());
   $("status").textContent = "Chave salva neste navegador.";
