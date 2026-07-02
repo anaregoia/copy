@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Como configurar o Bing Webmaster Tools pra sua clínica aparecer no ChatGPT | AR Digital</title>
+<meta name="description" content="Guia de 4 passos gratuitos pra indexar o site da sua clínica no Bing, a fonte que o ChatGPT usa pra buscar na web.">
+<link rel="canonical" href="https://anarego.com.br/blog/configurar-bing-webmaster-clinica/">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Como configurar o Bing Webmaster Tools pra sua clínica aparecer no ChatGPT">
+<meta property="og:description" content="Guia de 4 passos gratuitos pra indexar o site da sua clínica no Bing, a fonte que o ChatGPT usa pra buscar na web.">
+<meta property="og:url" content="https://anarego.com.br/blog/configurar-bing-webmaster-clinica/">
+<meta property="og:locale" content="pt_BR">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Como configurar o Bing Webmaster Tools pra sua clínica aparecer no ChatGPT",
+  "description": "Guia de 4 passos gratuitos pra indexar o site da sua clínica no Bing, a fonte que o ChatGPT usa pra buscar na web.",
+  "datePublished": "2026-06-26",
+  "dateModified": "2026-06-26",
+  "mainEntityOfPage": "https://anarego.com.br/blog/configurar-bing-webmaster-clinica/",
+  "author": {
+    "@type": "Person",
+    "name": "Ana Rego"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AR Digital",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://anarego.com.br/logo.png"
+    }
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Já tenho o site no Google. Preciso fazer no Bing também?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sim. Google e Bing são índices separados. Estar num não coloca você no outro."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto custa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nada. O Bing Webmaster Tools é gratuito."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quanto tempo até indexar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Com o IndexNow, páginas novas entram em minutos. A primeira indexação completa pode levar alguns dias."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root{--azul:#1a4fd6;--tinta:#0e1326;--cinza:#5b6478;--borda:#e2e7f0;--bg:#f6f8fc;--verde:#16a34a}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--tinta);line-height:1.7;background:#fff}
+  .nav{border-bottom:1px solid var(--borda);position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);z-index:10}
+  .nav-in{max-width:1100px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
+  .logo{font-weight:800;display:flex;gap:8px;align-items:center;text-decoration:none;color:inherit}
+  .logo .m{width:28px;height:28px;background:var(--azul);color:#fff;border-radius:7px;display:grid;place-items:center;font-size:12px}
+  .nav a.cta{background:var(--azul);color:#fff;padding:9px 16px;border-radius:9px;font-size:14px;font-weight:700;text-decoration:none}
+  article{max-width:720px;margin:0 auto;padding:50px 24px 70px}
+  .crumb{font-size:13px;color:var(--cinza);margin-bottom:22px}
+  .crumb a{color:var(--azul);text-decoration:none}
+  .tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .tags span{font-size:12px;font-weight:700;color:var(--azul);background:#e8efff;padding:4px 11px;border-radius:20px}
+  h1{font-size:clamp(28px,5vw,40px);line-height:1.15;letter-spacing:-1px;font-weight:800;margin-bottom:14px}
+  .byline{font-size:14px;color:var(--cinza);margin-bottom:30px;padding-bottom:24px;border-bottom:1px solid var(--borda)}
+  .answer{background:var(--bg);border-left:4px solid var(--azul);border-radius:0 12px 12px 0;padding:22px 24px;font-size:18px;font-weight:500;margin-bottom:34px}
+  h2{font-size:24px;letter-spacing:-.5px;margin:36px 0 14px;font-weight:800}
+  p{font-size:17px;margin-bottom:18px;color:#1f2740}
+  .stat{background:var(--tinta);color:#fff;border-radius:12px;padding:20px 24px;font-size:16px;margin:24px 0}
+  .stat b{color:#7fa0ff}
+  .faq{margin-top:46px;border-top:1px solid var(--borda);padding-top:30px}
+  .faq h2{margin-top:0}
+  .qa{margin-bottom:18px}
+  .qa .q{font-weight:700;font-size:17px;margin-bottom:6px}
+  .qa .a{font-size:16px;color:var(--cinza);margin:0}
+  .cta-box{margin-top:46px;background:linear-gradient(135deg,#1a4fd6,#143fb0);color:#fff;border-radius:16px;padding:34px;text-align:center}
+  .cta-box p{color:#dbe5ff;font-size:18px;margin-bottom:18px}
+  .cta-box a{background:#fff;color:var(--azul);padding:14px 26px;border-radius:10px;font-weight:700;text-decoration:none;display:inline-block}
+  footer{border-top:1px solid var(--borda);padding:30px 24px;text-align:center;color:#9aa3b5;font-size:13px}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a href="/" class="logo"><span class="m">AR</span>AR Digital</a>
+    <a href="/diagnostico/" class="cta">Diagnóstico grátis</a>
+  </div>
+</nav>
+
+<article>
+  <div class="crumb"><a href="/blog/">Blog</a> › Como aparecer na IA</div>
+
+  <div class="tags"><span>AEO</span><span>ChatGPT</span><span>Bing</span><span>Técnico</span></div>
+
+  <h1>Como configurar o Bing Webmaster Tools pra sua clínica aparecer no ChatGPT</h1>
+  <div class="byline">Por Ana Rego · 26 de junho de 2026</div>
+
+  <p class="answer">O ChatGPT busca na web usando o índice do Bing. Se o site da sua clínica não está indexado lá, ele não entra nas respostas da IA. Configurar o Bing Webmaster Tools tem quatro etapas gratuitas: criar a conta em bing.com/webmasters, verificar a propriedade do domínio, enviar o sitemap e ativar o IndexNow pra indexar páginas novas em minutos.</p>
+
+  <h2>Os quatro passos</h2>
+  <p>Primeiro, crie a conta em bing.com/webmasters, de graça. Segundo, verifique que o site é seu, colando um código que o Bing fornece. Terceiro, envie o seu sitemap.xml, o mapa de todas as páginas do site. Quarto, ative o IndexNow, que avisa o Bing toda vez que você publica algo novo.</p>
+
+  <h2>Por que esse passo é o mais importante</h2>
+  <p>Você pode ter o melhor site, o melhor conteúdo e o melhor perfil. Se o Bing nunca viu o seu site, o ChatGPT não te encontra. É a fundação.</p>
+
+  <div class="stat">Mais de <b>87% das citações do ChatGPT Search</b> coincidem com os melhores resultados do Bing, segundo a Seer Interactive.</div>
+
+  <h2>O que muda depois de indexar</h2>
+  <p>Depois que o Bing indexa o seu site, o ChatGPT passa a ter de onde te puxar. Não é garantia de aparecer, mas sem isso a chance é zero. É o pré-requisito de tudo no AEO.</p>
+
+  <div class="faq">
+    <h2>Perguntas frequentes</h2>
+    <div class="qa"><p class="q">Já tenho o site no Google. Preciso fazer no Bing também?</p><p class="a">Sim. Google e Bing são índices separados. Estar num não coloca você no outro.</p></div>
+    <div class="qa"><p class="q">Quanto custa?</p><p class="a">Nada. O Bing Webmaster Tools é gratuito.</p></div>
+    <div class="qa"><p class="q">Quanto tempo até indexar?</p><p class="a">Com o IndexNow, páginas novas entram em minutos. A primeira indexação completa pode levar alguns dias.</p></div>
+  </div>
+
+  <div class="cta-box">
+    <p>Não sabe se o seu site está no Bing? Eu verifico no seu diagnóstico.</p>
+    <a href="/diagnostico/">Fazer meu diagnóstico grátis</a>
+  </div>
+</article>
+
+<footer>© 2026 AR Digital — SEO Local & GEO para profissionais de saúde.</footer>
+
+</body>
+</html>

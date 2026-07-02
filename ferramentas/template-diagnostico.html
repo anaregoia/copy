@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diagnóstico de Presença na IA — AR Digital</title>
+<style>
+  :root{--azul:#1a4fd6;--tinta:#0e1326;--cinza:#5b6478;--borda:#e2e7f0;--verde:#16a34a;--vermelho:#ef4444;--bg:#f6f8fc}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#dfe5ef;color:var(--tinta);line-height:1.55;padding:30px 16px}
+  .toolbar{max-width:780px;margin:0 auto 18px;display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+  .toolbar p{font-size:13px;color:#46506a}
+  .btn{background:var(--azul);color:#fff;border:none;padding:11px 20px;border-radius:9px;font-weight:700;font-size:14px;cursor:pointer}
+  .btn.alt{background:#fff;color:var(--azul);border:1.5px solid var(--azul)}
+  .page{max-width:780px;margin:0 auto;background:#fff;border-radius:14px;padding:48px;box-shadow:0 10px 40px rgba(14,19,38,.12)}
+  .head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid var(--tinta);padding-bottom:18px;margin-bottom:26px}
+  .brand{font-size:20px;font-weight:800;display:flex;align-items:center;gap:8px}
+  .brand .m{width:30px;height:30px;background:var(--azul);color:#fff;border-radius:8px;display:grid;place-items:center;font-size:13px}
+  .head .meta{text-align:right;font-size:13px;color:var(--cinza)}
+  h1.docttl{font-size:24px;letter-spacing:-.6px;margin-bottom:4px}
+  .docsub{color:var(--cinza);font-size:15px;margin-bottom:28px}
+  .sec{margin-bottom:26px}
+  .sec h2{font-size:13px;text-transform:uppercase;letter-spacing:.8px;color:var(--azul);font-weight:800;margin-bottom:10px;border-left:3px solid var(--azul);padding-left:10px}
+  .sec p{font-size:15px;margin-bottom:8px}
+  [contenteditable]{outline:none;border-radius:6px;transition:.15s}
+  [contenteditable]:hover{background:#f3f6fc}
+  [contenteditable]:focus{background:#eef3fe;box-shadow:0 0 0 2px #bcd0fb}
+  .ia-row{display:flex;gap:10px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--borda)}
+  .ia-name{font-weight:700;width:110px;flex-shrink:0}
+  .pill{font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px}
+  .pill.no{background:#fdecec;color:var(--vermelho)}
+  .pill.yes{background:#e7f7ec;color:var(--verde)}
+  .resumo{background:var(--bg);border-radius:10px;padding:18px;font-size:15px;border-left:4px solid var(--azul)}
+  .check{list-style:none}
+  .check li{padding:7px 0 7px 28px;position:relative;font-size:15px;border-bottom:1px solid #f0f2f7}
+  .check li::before{content:"⚠";position:absolute;left:0;color:var(--vermelho)}
+  .dado{background:#0e1326;color:#fff;border-radius:10px;padding:20px;font-size:15px}
+  .dado b{color:#7fa0ff}
+  .cta{text-align:center;margin-top:28px;padding-top:24px;border-top:1px solid var(--borda)}
+  .cta p{font-size:16px;margin-bottom:6px}
+  .cta a{color:var(--azul);font-weight:700}
+  @media print{
+    body{background:#fff;padding:0}
+    .toolbar{display:none}
+    .page{box-shadow:none;border-radius:0;max-width:100%;padding:30px}
+    [contenteditable]:hover,[contenteditable]:focus{background:transparent;box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <p>Clique em qualquer texto pra editar. Depois exporte em PDF e mande no WhatsApp.</p>
+  <div style="display:flex;gap:8px">
+    <button class="btn" onclick="window.print()">Exportar PDF</button>
+  </div>
+</div>
+
+<div class="page">
+  <div class="head">
+    <div class="brand"><span class="m">AR</span>AR Digital</div>
+    <div class="meta">Diagnóstico feito por<br><b>Ana Rego</b><br><span contenteditable>00/00/2026</span></div>
+  </div>
+
+  <h1 class="docttl" contenteditable>Diagnóstico de Presença na IA</h1>
+  <p class="docsub"><span contenteditable>Clínica Exemplo</span> · <span contenteditable>Odontologia</span> · <span contenteditable>Porto Alegre</span></p>
+
+  <div class="sec">
+    <h2>A pergunta que eu testei</h2>
+    <p>Coloquei no ChatGPT, no Gemini e na Perplexity a pergunta que o seu paciente faz de verdade:</p>
+    <p style="font-weight:600;font-size:16px" contenteditable>"Qual o melhor dentista em Porto Alegre?"</p>
+  </div>
+
+  <div class="sec">
+    <h2>O resultado</h2>
+    <div class="ia-row">
+      <span class="ia-name">ChatGPT</span>
+      <span class="pill no" contenteditable>não apareceu</span>
+      <span contenteditable>Citou: Concorrente A, Concorrente B, Concorrente C</span>
+    </div>
+    <div class="ia-row">
+      <span class="ia-name">Gemini</span>
+      <span class="pill no" contenteditable>não apareceu</span>
+      <span contenteditable>Citou: Concorrente A, Concorrente D</span>
+    </div>
+    <div class="ia-row">
+      <span class="ia-name">Perplexity</span>
+      <span class="pill no" contenteditable>não apareceu</span>
+      <span contenteditable>Citou: Concorrente B, Concorrente E</span>
+    </div>
+    <div class="resumo" style="margin-top:16px">
+      A sua clínica apareceu em <b contenteditable>0 de 3</b> das IAs. Os pacientes que fazem essa pergunta estão sendo enviados para <span contenteditable>Concorrente A, Concorrente B e Concorrente C</span>.
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>Por que isso está acontecendo</h2>
+    <p>A IA recomenda quem ela conhece e confia. Ela cruza Google, site, diretórios e avaliações. No seu caso, encontrei:</p>
+    <ul class="check">
+      <li contenteditable>Perfil do Google incompleto (faltam serviços e descrição)</li>
+      <li contenteditable>Categoria do perfil genérica</li>
+      <li contenteditable>Poucas fotos e fotos desatualizadas</li>
+      <li contenteditable>Avaliações sem resposta</li>
+      <li contenteditable>Site não indexado no Bing (a fonte que o ChatGPT usa)</li>
+      <li contenteditable>Sem presença nos diretórios que a IA cruza</li>
+    </ul>
+    <p style="margin-top:12px">Cada item desses é uma porta fechada pra IA. Ela não te ignora por maldade. Ela só não tem informação suficiente pra confiar em você. Então preenche a resposta com quem tem.</p>
+  </div>
+
+  <div class="sec">
+    <h2>O que muda quando isso é organizado</h2>
+    <div class="dado">
+      Quando a presença fica completa e consistente, a IA passa a ter motivo pra te citar. Não é mágica. É estrutura. Segundo um estudo da <b>Universidade de Princeton</b>, conteúdo estruturado e com dados aumenta a visibilidade nas IAs em <b>até 40%</b>.
+    </div>
+  </div>
+
+  <div class="cta">
+    <p>Quer que eu mostre exatamente como organizar tudo isso pra você virar uma das respostas?</p>
+    <p>Me chama no WhatsApp: <a href="https://wa.me/5551999797207" contenteditable>(51) 99979-7207</a></p>
+  </div>
+</div>
+
+</body>
+</html>
