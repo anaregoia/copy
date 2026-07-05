@@ -90,14 +90,30 @@ Lupa Digital — R$47/mês (mentoria contínua, exclusiva pra quem comprou a Bú
 
 ---
 
-## 7. Plano de execução (ordem sugerida, nada disparado ainda)
+## 7. Plano de execução — STATUS
 
-1. Você manda prints: dashboard + `/GMB7Dias` + `/AnalisarGMB` do GMB Otimizador PRO, e o texto de instruções dos 2 GPTs.
-2. Confirmar preço/posição do ebook.
-3. Confirmar se topa arquivar os projetos Lovable duplicados (`bussolalocal1`, `gmb-bussolalocal`) e o app solo `gmb7dias`.
-4. Eu reescrevo a estrutura de 1 dia (ex: Dia 1) no novo formato enxuto, você aprova o modelo.
-5. Replico o modelo pros outros 6 dias + Dia 8 + Módulo 2.
-6. Ajusto o Mapa de Execução pra virar a única porta de entrada.
-7. Alinho os CTAs cruzados da esteira de valor (ebook → Bússola → Lupa Digital).
+### Já executado direto no Notion (produto ao vivo)
 
-Nada disso foi executado — é o roteiro pronto pra quando você der sinal, peça por peça ou tudo de uma vez.
+Cortei a duplicação em cada dia: manteve-se **Resumo do dia** + **Checklist do dia (execução)** como caminho obrigatório; o guia longo, os passos repetidos, os exemplos e os "checklist final" duplicados viraram **um único toggle opcional** ("Modelo pronto / Passo a passo detalhado — opcional") no fim de cada dia, preservando templates e exemplos reais reutilizáveis.
+
+| Dia | Status |
+|---|---|
+| Dia 1 | Já estava enxuto (sem duplicação) — nenhuma mudança necessária |
+| Dia 2 (NAPW) | ✅ Corrigido |
+| Dia 3 (Descrição) | ✅ Corrigido |
+| Dia 4 (Fotos) | ✅ Corrigido |
+| Dia 5 (Serviços) | ⏳ Editado, mas a tarefa assíncrona do Notion ficou "running" por vários minutos — confirmar se aplicou antes de seguir |
+| Dia 6 (Postagem) | ✅ Corrigido |
+| Dia 7 (Avaliações) | ⏳ Editado, mas a tarefa assíncrona do Notion ficou "running" por vários minutos — confirmar se aplicou antes de seguir |
+| Dia 8 (bônus IA/GEO) | Já estava enxuto (sem duplicação) — nenhuma mudança necessária |
+| Módulo 2 — Pilar 1, 2, 3 (manutenção) | Já bem estruturados (tabela-resumo + detalhe, sem duplicação) — nenhuma mudança necessária |
+
+**Ação pendente:** reabrir o Notion (Dia 5 e Dia 7) e conferir visualmente se o toggle "opcional" está no lugar certo. Se as tarefas travadas não tiverem aplicado, repito a edição.
+
+### Ainda não executado (depende de você)
+
+1. Prints do GMB Otimizador PRO (dashboard + `/GMB7Dias` + `/AnalisarGMB`) e texto de instruções dos 2 GPTs.
+2. Confirmar preço/posição do ebook na esteira de venda.
+3. Confirmar se pode arquivar os projetos Lovable duplicados (`bussolalocal1`, `gmb-bussolalocal`) e o app solo `gmb7dias`.
+4. Ajustar o Mapa de Execução pra virar a única porta de entrada (hoje ainda há 2 hubs).
+5. Alinhar os CTAs cruzados da esteira de valor (ebook → Bússola → Lupa Digital).
