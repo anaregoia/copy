@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora do Custo da Inação — AR Digital</title>
+<meta name="description" content="Quanto você deixa na mesa todo mês por não aparecer no Top 3 do Google e nas respostas da IA. Faça a conta.">
+<style>
+  :root{
+    --bg:#0b140f;              /* fundo quase preto esverdeado */
+    --surface:#111d16;
+    --surface-2:#16241b;
+    --card:#13201896;
+    --neon:#57e08a;            /* verde neon (aprox. oklch 0.86 0.18 145) */
+    --neon-soft:#3fbf74;
+    --texto:#f2f7f3;
+    --muted:#9fb3a6;
+    --borda:#25382c;
+    --vermelho:#ff6b6b;
+    --radius:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:
+      radial-gradient(ellipse 80% 55% at 50% 0%, rgba(87,224,138,.14), transparent 70%),
+      linear-gradient(180deg,#0d1712,#0a120d);
+    color:var(--texto);line-height:1.55;-webkit-font-smoothing:antialiased;
+    min-height:100vh;padding:28px 16px;
+  }
+  h1,h2,h3{font-family:"Sora","Inter",sans-serif;letter-spacing:-.02em;font-weight:800}
+  .toolbar{max-width:720px;margin:0 auto 16px;display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+  .toolbar p{font-size:13px;color:var(--muted)}
+  .btn{border:none;padding:12px 20px;border-radius:999px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;transition:.2s}
+  .btn-neon{background:var(--neon);color:#07110b}
+  .btn-neon:hover{background:var(--neon-soft)}
+  .btn-ghost{background:transparent;color:var(--texto);border:1.5px solid var(--borda)}
+  .btn-ghost:hover{border-color:var(--neon);color:var(--neon)}
+  .card{max-width:720px;margin:0 auto;background:var(--surface);border:1px solid var(--borda);border-radius:20px;padding:40px;box-shadow:0 24px 60px -24px rgba(0,0,0,.6)}
+  .brand{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .brand .m{width:34px;height:34px;background:var(--neon);color:#07110b;border-radius:9px;display:grid;place-items:center;font-weight:800;font-family:"Sora",sans-serif}
+  .brand b{font-size:18px}
+  .tag{display:inline-block;font-size:12px;font-weight:700;color:var(--neon);background:rgba(87,224,138,.12);border:1px solid rgba(87,224,138,.25);padding:5px 12px;border-radius:999px;margin:18px 0 14px;text-transform:uppercase;letter-spacing:.5px}
+  h1{font-size:clamp(26px,5vw,36px);line-height:1.1;margin-bottom:14px}
+  .sub{color:var(--muted);font-size:16px;margin-bottom:28px;max-width:560px}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:14px;font-weight:600;margin-bottom:8px}
+  .field .hint{font-weight:400;color:var(--muted);font-size:13px}
+  .field input[type=number]{width:100%;padding:14px 16px;border:1.5px solid var(--borda);border-radius:12px;font-size:16px;font-family:inherit;background:var(--surface-2);color:var(--texto)}
+  .field input:focus{outline:none;border-color:var(--neon)}
+  .rangewrap{display:flex;align-items:center;gap:14px}
+  .rangewrap input[type=range]{flex:1;accent-color:var(--neon)}
+  .rangeval{min-width:46px;text-align:center;font-weight:800;font-family:"Sora",sans-serif;color:var(--neon);font-size:20px}
+  .result{margin-top:26px;border:1px solid rgba(87,224,138,.3);border-radius:var(--radius);padding:26px;background:linear-gradient(135deg,rgba(87,224,138,.10),rgba(87,224,138,.03))}
+  .result .lead{font-size:15px;color:var(--muted);margin-bottom:14px}
+  .result .lead b{color:var(--texto)}
+  .bignum{font-family:"Sora",sans-serif;font-weight:800;font-size:clamp(34px,8vw,52px);letter-spacing:-.03em;color:var(--neon);line-height:1}
+  .bignum small{display:block;font-size:14px;color:var(--muted);font-weight:600;margin-top:6px;letter-spacing:0}
+  .peryear{margin-top:18px;padding-top:16px;border-top:1px solid var(--borda);font-size:15px;color:var(--muted)}
+  .peryear b{color:var(--texto);font-size:20px;font-family:"Sora",sans-serif}
+  .bridge{margin-top:22px;background:var(--surface-2);border-left:3px solid var(--neon);border-radius:0 12px 12px 0;padding:16px 18px;font-size:15px}
+  .bridge b{color:var(--neon)}
+  .cta{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
+  .disc{margin-top:22px;font-size:12px;color:#6f8377;line-height:1.5}
+  .foot{max-width:720px;margin:20px auto 0;text-align:center;font-size:12px;color:#6f8377}
+  @media print{
+    body{background:#fff;color:#111;padding:0}
+    .toolbar{display:none}
+    .card{box-shadow:none;border-color:#ccc;max-width:100%;background:#fff;color:#111}
+    .sub,.field .hint,.result .lead,.peryear,.disc,.foot{color:#444}
+    h1,.bignum,.peryear b,.brand b{color:#111}
+    .bignum,.rangeval,.bridge b,.tag{color:#0a7a3c !important}
+    .result{background:#f4fbf6;border-color:#bfe6cd}
+    .brand .m,.btn-neon{background:#0a7a3c;color:#fff}
+    .cta{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <p>Preencha, mostre pro cliente, ou exporte em PDF pra enviar junto com o Raio-X da IA.</p>
+  <div style="display:flex;gap:8px">
+    <button class="btn btn-neon" onclick="window.print()">Exportar PDF</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="brand"><span class="m">AR</span><b>AR Digital</b></div>
+  <span class="tag">Calculadora do custo da inação</span>
+  <h1>Quanto você deixa na mesa todo mês?</h1>
+  <p class="sub">Quantos pacientes procuram o seu serviço na sua região e encontram o concorrente primeiro? Faça a conta que ninguém te mostra.</p>
+
+  <div class="field">
+    <label for="ticket">Ticket médio do seu principal serviço <span class="hint">(quanto vale, em média, um paciente novo)</span></label>
+    <input type="number" id="ticket" min="0" step="50" placeholder="Ex: 1500" oninput="calc()">
+  </div>
+
+  <div class="field">
+    <label for="buscas">Buscas estimadas por mês na sua região <span class="hint">(quantas pessoas procuram o seu tipo de serviço)</span></label>
+    <input type="number" id="buscas" min="0" step="10" placeholder="Ex: 300" oninput="calc()">
+  </div>
+
+  <div class="field">
+    <label>Se você recuperasse só uma parte desses pacientes por mês… <span class="hint">(arraste — seja conservador)</span></label>
+    <div class="rangewrap">
+      <input type="range" id="recup" min="1" max="30" value="5" oninput="calc()">
+      <span class="rangeval" id="recupval">5</span>
+    </div>
+  </div>
+
+  <div class="result">
+    <p class="lead">Recuperando <b><span id="rN">5</span></b> pacientes por mês, ao seu ticket, você estaria deixando de faturar:</p>
+    <div class="bignum" id="mensal">R$ 0<small>por mês</small></div>
+    <div class="peryear">Em 12 meses, isso soma <b id="anual">R$ 0</b>.</div>
+    <div class="bridge">
+      Esta é uma <b>estimativa</b> a partir dos seus números. O <b>Raio-X da IA</b> é real: eu testo o ChatGPT, o Gemini e a Perplexity e te mostro exatamente quem está sendo indicado hoje no seu lugar.
+    </div>
+    <div class="cta">
+      <a href="https://wa.me/5551999797207" class="btn btn-neon">Quero meu Raio-X da IA</a>
+      <a href="https://wa.me/5551999797207" class="btn btn-ghost">Falar no WhatsApp</a>
+    </div>
+    <p class="disc">Simulação meramente ilustrativa, calculada a partir dos números que você inseriu. Não representa promessa, projeção ou garantia de resultado. O desempenho depende do comportamento do algoritmo, da demanda local e de múltiplos fatores fora do controle da AR Digital.</p>
+  </div>
+</div>
+
+<p class="foot">© 2026 AR Digital — Arquitetura de Presença para profissionais de saúde. AR Digital não é afiliada ao Google LLC.</p>
+
+<script>
+  function brl(v){
+    return "R$ " + (Math.round(v)).toLocaleString("pt-BR");
+  }
+  function calc(){
+    var ticket = parseFloat(document.getElementById("ticket").value) || 0;
+    var recup  = parseInt(document.getElementById("recup").value) || 0;
+    document.getElementById("recupval").textContent = recup;
+    document.getElementById("rN").textContent = recup;
+    var mensal = ticket * recup;
+    document.getElementById("mensal").innerHTML = brl(mensal) + "<small>por mês</small>";
+    document.getElementById("anual").textContent = brl(mensal * 12);
+  }
+  calc();
+</script>
+</body>
+</html>
